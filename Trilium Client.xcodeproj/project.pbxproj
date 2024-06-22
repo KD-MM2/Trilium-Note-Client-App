@@ -16,6 +16,15 @@
 		8B72C3F82C25EDA7008DF1AF /* Trilium_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C3F72C25EDA7008DF1AF /* Trilium_ClientTests.swift */; };
 		8B72C4022C25EDA7008DF1AF /* Trilium_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4012C25EDA7008DF1AF /* Trilium_ClientUITests.swift */; };
 		8B72C4042C25EDA7008DF1AF /* Trilium_ClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4032C25EDA7008DF1AF /* Trilium_ClientUITestsLaunchTests.swift */; };
+		8B72C4152C25F11E008DF1AF /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4142C25F11E008DF1AF /* Setup.swift */; };
+		8B72C41B2C270CFA008DF1AF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C41A2C270CFA008DF1AF /* Home.swift */; };
+		8B72C41D2C270D6A008DF1AF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C41C2C270D6A008DF1AF /* Note.swift */; };
+		8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4202C272DA7008DF1AF /* NoteRow.swift */; };
+		8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4222C2734D7008DF1AF /* NoteListView.swift */; };
+		8B72C4252C273635008DF1AF /* noteData.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B72C4242C273635008DF1AF /* noteData.json */; };
+		8B72C4272C273879008DF1AF /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4262C273879008DF1AF /* ModelData.swift */; };
+		8B72C4292C274F9B008DF1AF /* NoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4282C274F9B008DF1AF /* NoteContentView.swift */; };
+		8B72C42C2C275209008DF1AF /* SwiftDown in Frameworks */ = {isa = PBXBuildFile; productRef = 8B72C42B2C275209008DF1AF /* SwiftDown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +57,14 @@
 		8B72C3FD2C25EDA7008DF1AF /* Trilium ClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trilium ClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B72C4012C25EDA7008DF1AF /* Trilium_ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trilium_ClientUITests.swift; sourceTree = "<group>"; };
 		8B72C4032C25EDA7008DF1AF /* Trilium_ClientUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trilium_ClientUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8B72C4142C25F11E008DF1AF /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
+		8B72C41A2C270CFA008DF1AF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		8B72C41C2C270D6A008DF1AF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		8B72C4202C272DA7008DF1AF /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
+		8B72C4222C2734D7008DF1AF /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		8B72C4242C273635008DF1AF /* noteData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = noteData.json; sourceTree = "<group>"; };
+		8B72C4262C273879008DF1AF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		8B72C4282C274F9B008DF1AF /* NoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B72C42C2C275209008DF1AF /* SwiftDown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,10 +116,15 @@
 		8B72C3E02C25EDA5008DF1AF /* Trilium Client */ = {
 			isa = PBXGroup;
 			children = (
+				8B72C4132C25F0EF008DF1AF /* Libraries */,
+				8B72C4122C25F0DB008DF1AF /* Helpers */,
+				8B72C4112C25F0CF008DF1AF /* Components */,
+				8B72C4102C25F0BF008DF1AF /* Views */,
 				8B72C3E12C25EDA5008DF1AF /* Trilium_ClientApp.swift */,
 				8B72C3E32C25EDA5008DF1AF /* ContentView.swift */,
 				8B72C3E52C25EDA7008DF1AF /* Assets.xcassets */,
 				8B72C3EA2C25EDA7008DF1AF /* Persistence.swift */,
+				8B72C4242C273635008DF1AF /* noteData.json */,
 				8B72C3EC2C25EDA7008DF1AF /* Trilium_Client.xcdatamodeld */,
 				8B72C3E72C25EDA7008DF1AF /* Preview Content */,
 			);
@@ -133,6 +156,41 @@
 			path = "Trilium ClientUITests";
 			sourceTree = "<group>";
 		};
+		8B72C4102C25F0BF008DF1AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B72C4142C25F11E008DF1AF /* Setup.swift */,
+				8B72C41A2C270CFA008DF1AF /* Home.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8B72C4112C25F0CF008DF1AF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8B72C4202C272DA7008DF1AF /* NoteRow.swift */,
+				8B72C4222C2734D7008DF1AF /* NoteListView.swift */,
+				8B72C4282C274F9B008DF1AF /* NoteContentView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8B72C4122C25F0DB008DF1AF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8B72C41C2C270D6A008DF1AF /* Note.swift */,
+				8B72C4262C273879008DF1AF /* ModelData.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8B72C4132C25F0EF008DF1AF /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +207,9 @@
 			dependencies = (
 			);
 			name = "Trilium Client";
+			packageProductDependencies = (
+				8B72C42B2C275209008DF1AF /* SwiftDown */,
+			);
 			productName = "Trilium Client";
 			productReference = 8B72C3DE2C25EDA5008DF1AF /* Trilium Client.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +282,10 @@
 				Base,
 			);
 			mainGroup = 8B72C3D52C25EDA5008DF1AF;
+			packageReferences = (
+				8B72C4192C26B6E7008DF1AF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8B72C42A2C275209008DF1AF /* XCRemoteSwiftPackageReference "SwiftDown" */,
+			);
 			productRefGroup = 8B72C3DF2C25EDA5008DF1AF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -237,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B72C4252C273635008DF1AF /* noteData.json in Resources */,
 				8B72C3E92C25EDA7008DF1AF /* Preview Assets.xcassets in Resources */,
 				8B72C3E62C25EDA7008DF1AF /* Assets.xcassets in Resources */,
 			);
@@ -263,9 +329,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B72C4292C274F9B008DF1AF /* NoteContentView.swift in Sources */,
 				8B72C3EB2C25EDA7008DF1AF /* Persistence.swift in Sources */,
 				8B72C3E42C25EDA5008DF1AF /* ContentView.swift in Sources */,
+				8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */,
+				8B72C41D2C270D6A008DF1AF /* Note.swift in Sources */,
 				8B72C3E22C25EDA5008DF1AF /* Trilium_ClientApp.swift in Sources */,
+				8B72C4152C25F11E008DF1AF /* Setup.swift in Sources */,
+				8B72C41B2C270CFA008DF1AF /* Home.swift in Sources */,
+				8B72C4272C273879008DF1AF /* ModelData.swift in Sources */,
+				8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */,
 				8B72C3EE2C25EDA7008DF1AF /* Trilium_Client.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -412,7 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -433,11 +506,14 @@
 				DEVELOPMENT_TEAM = YX582Y737P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Trilium Notes";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,11 +538,14 @@
 				DEVELOPMENT_TEAM = YX582Y737P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Trilium Notes";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -489,7 +568,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YX582Y737P;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kaotd.Trilium-ClientTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,7 +588,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YX582Y737P;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kaotd.Trilium-ClientTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -528,6 +607,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YX582Y737P;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kaotd.Trilium-ClientUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -546,6 +626,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YX582Y737P;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kaotd.Trilium-ClientUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -596,6 +677,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B72C4192C26B6E7008DF1AF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		8B72C42A2C275209008DF1AF /* XCRemoteSwiftPackageReference "SwiftDown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/qeude/SwiftDown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B72C42B2C275209008DF1AF /* SwiftDown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B72C42A2C275209008DF1AF /* XCRemoteSwiftPackageReference "SwiftDown" */;
+			productName = SwiftDown;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8B72C3EC2C25EDA7008DF1AF /* Trilium_Client.xcdatamodeld */ = {
