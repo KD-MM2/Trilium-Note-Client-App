@@ -9,13 +9,18 @@ import SwiftUI
 
 @main
 struct Trilium_ClientApp: App {
-    let persistenceController = PersistenceController.shared
-
+    var isSetupDone: Bool {
+        return UserDefaults.standard.bool(forKey: "isSetupDone")
+    }
+    
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            Setup()
+            if (!isSetupDone) {
+                Setup()
+            } else {
+                Home()
+            }
+            
         }
     }
 }

@@ -10,14 +10,13 @@ import Foundation
 
 struct Home: View {
     var root: Array<Note> {
-        return notes.filter {
-            $0.parentNoteIds.contains("root")
-        }
+        return getRoot()
     }
     var body: some View {
         NavigationStack{
             NoteListView(noteList: root)
         }
+        
     }
 }
 

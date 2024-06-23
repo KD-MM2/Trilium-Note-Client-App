@@ -10,15 +10,7 @@ import SwiftUI
 struct NoteRow: View {
     var note: Note
     var modifiedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZ"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone.current
-        guard let date = formatter.date(from: note.utcDateModified) else {
-            return "Invalid date"
-        }
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.string(from: date)
+        return parseDateUtc(dateString: note.utcDateModified)
     }
     
     var body: some View {
@@ -43,10 +35,7 @@ struct NoteRow: View {
 
 #Preview {
     Group{
-    NoteRow(note: notes[64])
-    NoteRow(note: notes[65])
-    NoteRow(note: notes[66])
-    NoteRow(note: notes[67])
-    NoteRow(note: notes[68])
+        NoteRow(note: notes[0])
+        NoteRow(note: notes[20])
     }
 }

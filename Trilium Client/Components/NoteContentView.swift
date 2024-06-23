@@ -11,6 +11,11 @@ struct NoteContentView: View {
     var note: Note
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button{
+            print(note.noteId)
+        } label: {
+            Text("print")
+        }
     }
 }
 

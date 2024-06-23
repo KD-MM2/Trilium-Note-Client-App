@@ -28,6 +28,20 @@ struct Setup: View {
     private var passwordBtnText: String = "Password"
     private var etapiTokenText: String = "ETAPI TOKEN"
     
+    func onSubmit() {
+        UserDefaults.standard.set(instanceUrl, forKey: "instanceUrl")
+        UserDefaults.standard.set(useEtapiToken ? instanceEtapiToken : instancePassword,
+                                  forKey: useEtapiToken ? "instanceEtapiToken" : "instancePassword")
+        UserDefaults.standard.set(true, forKey: "isSetupDone")
+        print("Setup done")
+        print("instanceUrl: \(instanceUrl)")
+        print("instancePassword: \(instancePassword)")
+        print("instanceEtapiToken: \(instanceEtapiToken)")
+        return
+    }
+    
+    @State private var showAlert: Bool = false
+    
     var body: some View {
         VStack {
             Image("IconColor")
@@ -38,23 +52,22 @@ struct Setup: View {
                         .focused($instanceUrlFieldFocused)
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
-                        .onSubmit {
-                            print("url submit")
-                        }
                 }
                 
                 Section(header: Text(useEtapiToken ? etapiTokenText : passwordText),
                         footer: Text("Will be automaticly saved and using for login/authenticate to the instance")) {
-                    SecureField(useEtapiToken ? etapiPlaceholderText : passwordPlaceholderText, text: $instancePassword)
-                        .focused($instancePasswordFieldFocused)
+                    SecureField(useEtapiToken ? etapiPlaceholderText : passwordPlaceholderText, text: useEtapiToken ? $instanceEtapiToken : $instancePassword)
+                        .focused(useEtapiToken ? $instanceEtapiTokenFieldFocused : $instancePasswordFieldFocused)
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(false)
-                        .onSubmit {
-                            print("pw/etapi submit")
-                        }
                     
                     Button {
                         useEtapiToken = !useEtapiToken
+                        if(useEtapiToken) {
+                            instancePassword = ""
+                        } else {
+                            instanceEtapiToken = ""
+                        }
                     } label: {
                         Text("or use " + (useEtapiToken ? passwordBtnText : etapiTokenBtnText))
                     }
@@ -62,14 +75,21 @@ struct Setup: View {
                 }
                 
                 Button {
-                    print("submit")
+                    if (instanceUrl == "" || (useEtapiToken ? instanceEtapiToken : instancePassword) == "") {
+                        showAlert.toggle()
+                    } else {
+                        onSubmit()
+                    }
                 } label: {
                     Text("Signin")
                 }
-                // align text center
                 .frame(maxWidth: .infinity, alignment: .center)
                 
-            }.scrollDisabled(true)
+            }
+            .scrollDisabled(true)
+            .alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Error"), message: Text("Please fill all fields"))
+            })
         }
     }
 }

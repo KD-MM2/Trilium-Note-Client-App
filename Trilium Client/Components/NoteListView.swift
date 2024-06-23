@@ -10,9 +10,9 @@ import SwiftUI
 struct NoteListView: View {
     var noteList: Array<Note>
     var navigationTitle: String {
-        let parentNote = notes.first(where: { $0.noteId == noteList[0].parentNoteIds[0] })
-        return parentNote?.title ?? "Notes"
+        return getParentTitle(childNoteId: noteList[0].parentNoteIds[0])
     }
+    
     var body: some View {
         List(noteList, id: \.id) { note in
             NavigationLink {
@@ -29,14 +29,33 @@ struct NoteListView: View {
         }
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(content: {
+            Menu {
+                Section("Actions") {
+                    Button("Create note") {  }
+                    Button("...") {  }
+                }
+                
+                Button { } label: {
+                    Label("Add to Favorites", systemImage: "heart")
+                }
+                
+                Divider()
+                
+                Button(role: .destructive) { } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            } label: {
+                Label("Menu", systemImage: "plus")
+            }
+            
+        })
     }
     
 }
 
 #Preview {
     NavigationStack {
-        NoteListView(noteList: notes.filter {
-            $0.parentNoteIds.contains("root")
-        })
+        NoteListView(noteList: getRoot())
     }
 }
