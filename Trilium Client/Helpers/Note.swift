@@ -41,3 +41,32 @@ struct Note: Hashable, Codable, Identifiable {
         return noteId
     }
 }
+
+struct NoteWithBranch: Codable {
+    let note: Note
+    let branch: Branch
+}
+
+struct Branch: Codable {
+    let branchId: String
+    let noteId: String
+    let parentNoteId: String
+    // Add other properties as needed
+}
+
+struct SearchResponse: Codable {
+    let results: [Note]
+}
+
+struct AppInfo: Codable {
+    let appVersion: String
+    let dbVersion: Int
+    let nodeVersion: String
+    let syncVersion: Int
+    let buildDate: String
+    let buildRevision: String
+    let dataDirectory: String
+    let clipperProtocolVersion: String
+    let utcDateTime: String
+}
+

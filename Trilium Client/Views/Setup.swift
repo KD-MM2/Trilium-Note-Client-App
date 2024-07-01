@@ -5,9 +5,12 @@
 //  Created by Cao Thai Duong on 2024/06/22.
 //
 
+import Alamofire
 import SwiftUI
 
 struct Setup: View {
+    @EnvironmentObject var router: Router
+    
     @State private var instanceUrl: String = ""
     @State private var instancePassword: String = ""
     @State private var instanceEtapiToken: String = ""
@@ -29,18 +32,25 @@ struct Setup: View {
     private var etapiTokenText: String = "ETAPI TOKEN"
     
     func onSubmit() {
-        UserDefaults.standard.set(instanceUrl, forKey: "instanceUrl")
-        UserDefaults.standard.set(useEtapiToken ? instanceEtapiToken : instancePassword,
-                                  forKey: useEtapiToken ? "instanceEtapiToken" : "instancePassword")
-        UserDefaults.standard.set(true, forKey: "isSetupDone")
-        print("Setup done")
-        print("instanceUrl: \(instanceUrl)")
-        print("instancePassword: \(instancePassword)")
-        print("instanceEtapiToken: \(instanceEtapiToken)")
-        return
+        // func loginToInstance(instanceUrl: String, instancePassword: String?, instanceEtapiToken: String?, completion: @escaping (Result<String, Error>) -> Void)
+        loginToInstance(instanceUrl: instanceUrl, instancePassword: instancePassword, instanceEtapiToken: instanceEtapiToken, completion: { result in
+            switch result {
+            case let .success(authToken):
+                print("Login success with token: \(authToken)")
+                UserDefaults.standard.set(instanceUrl, forKey: "instanceUrl")
+                UserDefaults.standard.set(useEtapiToken ? instanceEtapiToken : instancePassword, forKey: useEtapiToken ? "instanceEtapiToken" : "instancePassword")
+                UserDefaults.standard.set(true, forKey: "isSetupDone")
+                
+                // navigate to Home view using EnvironmentObject
+//                router.navigateTo(.home)
+            case let .failure(error):
+                print("Login failed with error: \(error)")
+            }
+        })
+        
     }
     
-    @State private var showAlert: Bool = false
+    @State var showAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -55,7 +65,8 @@ struct Setup: View {
                 }
                 
                 Section(header: Text(useEtapiToken ? etapiTokenText : passwordText),
-                        footer: Text("Will be automaticly saved and using for login/authenticate to the instance")) {
+                        footer: Text("Will be automaticly saved and using for login/authenticate to the instance"))
+                {
                     SecureField(useEtapiToken ? etapiPlaceholderText : passwordPlaceholderText, text: useEtapiToken ? $instanceEtapiToken : $instancePassword)
                         .focused(useEtapiToken ? $instanceEtapiTokenFieldFocused : $instancePasswordFieldFocused)
                         .textInputAutocapitalization(.never)
@@ -63,7 +74,7 @@ struct Setup: View {
                     
                     Button {
                         useEtapiToken = !useEtapiToken
-                        if(useEtapiToken) {
+                        if useEtapiToken {
                             instancePassword = ""
                         } else {
                             instanceEtapiToken = ""
@@ -75,23 +86,26 @@ struct Setup: View {
                 }
                 
                 Button {
-                    if (instanceUrl == "" || (useEtapiToken ? instanceEtapiToken : instancePassword) == "") {
-                        showAlert.toggle()
-                    } else {
-                        onSubmit()
-                    }
+//                    if instanceUrl == "" || (useEtapiToken ? instanceEtapiToken : instancePassword) == "" {
+//                        showAlert.toggle()
+//                    } else {
+//                        onSubmit()
+                    router.navigateTo(.root)
+//                    }
                 } label: {
                     Text("Signin")
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
-                
             }
             .scrollDisabled(true)
             .alert(isPresented: $showAlert, content: {
                 Alert(title: Text("Error"), message: Text("Please fill all fields"))
             })
         }
+        .toolbar(.hidden)
     }
+
+    
 }
 
 #Preview {

@@ -9,18 +9,9 @@ import SwiftUI
 
 @main
 struct Trilium_ClientApp: App {
-    var isSetupDone: Bool {
-        return UserDefaults.standard.bool(forKey: "isSetupDone")
-    }
-    
     var body: some Scene {
         WindowGroup {
-            if (!isSetupDone) {
-                Setup()
-            } else {
-                Home()
-            }
-            
+            ContentView()
         }
     }
 }
