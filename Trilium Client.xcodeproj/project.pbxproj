@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0F74F02C359E3900265A96 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F74EF2C359E3900265A96 /* RouterView.swift */; };
 		8B21B05B2C29ECA0005D869E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B21B05A2C29ECA0005D869E /* Alamofire */; };
 		8B21B05D2C29ECA0005D869E /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8B21B05C2C29ECA0005D869E /* AlamofireDynamic */; };
 		8B72C3E22C25EDA5008DF1AF /* Trilium_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C3E12C25EDA5008DF1AF /* Trilium_ClientApp.swift */; };
@@ -17,8 +18,8 @@
 		8B72C3F82C25EDA7008DF1AF /* Trilium_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C3F72C25EDA7008DF1AF /* Trilium_ClientTests.swift */; };
 		8B72C4022C25EDA7008DF1AF /* Trilium_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4012C25EDA7008DF1AF /* Trilium_ClientUITests.swift */; };
 		8B72C4042C25EDA7008DF1AF /* Trilium_ClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4032C25EDA7008DF1AF /* Trilium_ClientUITestsLaunchTests.swift */; };
-		8B72C4152C25F11E008DF1AF /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4142C25F11E008DF1AF /* Setup.swift */; };
-		8B72C41B2C270CFA008DF1AF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C41A2C270CFA008DF1AF /* Home.swift */; };
+		8B72C4152C25F11E008DF1AF /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4142C25F11E008DF1AF /* SetupView.swift */; };
+		8B72C41B2C270CFA008DF1AF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C41A2C270CFA008DF1AF /* HomeView.swift */; };
 		8B72C41D2C270D6A008DF1AF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C41C2C270D6A008DF1AF /* Note.swift */; };
 		8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4202C272DA7008DF1AF /* NoteRow.swift */; };
 		8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4222C2734D7008DF1AF /* NoteListView.swift */; };
@@ -27,7 +28,7 @@
 		8B72C4292C274F9B008DF1AF /* NoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4282C274F9B008DF1AF /* NoteContentView.swift */; };
 		8B72C42C2C275209008DF1AF /* SwiftDown in Frameworks */ = {isa = PBXBuildFile; productRef = 8B72C42B2C275209008DF1AF /* SwiftDown */; };
 		8B72C4302C2852A7008DF1AF /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C42F2C2852A7008DF1AF /* APIHelper.swift */; };
-		8BBC79192C2DCAEC008ABFDA /* GettingStarted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC79182C2DCAEC008ABFDA /* GettingStarted.swift */; };
+		8BBC79192C2DCAEC008ABFDA /* GettingStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */; };
 		8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */; };
 		8BBE64582C2C8A80006B6A4D /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B0F74EF2C359E3900265A96 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		8B72C3DE2C25EDA5008DF1AF /* Trilium Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trilium Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B72C3E12C25EDA5008DF1AF /* Trilium_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trilium_ClientApp.swift; sourceTree = "<group>"; };
 		8B72C3E52C25EDA7008DF1AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,8 +63,8 @@
 		8B72C3FD2C25EDA7008DF1AF /* Trilium ClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trilium ClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B72C4012C25EDA7008DF1AF /* Trilium_ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trilium_ClientUITests.swift; sourceTree = "<group>"; };
 		8B72C4032C25EDA7008DF1AF /* Trilium_ClientUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trilium_ClientUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8B72C4142C25F11E008DF1AF /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
-		8B72C41A2C270CFA008DF1AF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		8B72C4142C25F11E008DF1AF /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		8B72C41A2C270CFA008DF1AF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8B72C41C2C270D6A008DF1AF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		8B72C4202C272DA7008DF1AF /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		8B72C4222C2734D7008DF1AF /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
@@ -70,7 +72,7 @@
 		8B72C4262C273879008DF1AF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		8B72C4282C274F9B008DF1AF /* NoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentView.swift; sourceTree = "<group>"; };
 		8B72C42F2C2852A7008DF1AF /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
-		8BBC79182C2DCAEC008ABFDA /* GettingStarted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStarted.swift; sourceTree = "<group>"; };
+		8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedView.swift; sourceTree = "<group>"; };
 		8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,9 +171,10 @@
 		8B72C4102C25F0BF008DF1AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8B72C4142C25F11E008DF1AF /* Setup.swift */,
-				8BBC79182C2DCAEC008ABFDA /* GettingStarted.swift */,
-				8B72C41A2C270CFA008DF1AF /* Home.swift */,
+				8B72C4142C25F11E008DF1AF /* SetupView.swift */,
+				8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */,
+				8B72C41A2C270CFA008DF1AF /* HomeView.swift */,
+				8B0F74EF2C359E3900265A96 /* RouterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,9 +355,10 @@
 				8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */,
 				8B72C41D2C270D6A008DF1AF /* Note.swift in Sources */,
 				8B72C3E22C25EDA5008DF1AF /* Trilium_ClientApp.swift in Sources */,
-				8BBC79192C2DCAEC008ABFDA /* GettingStarted.swift in Sources */,
-				8B72C4152C25F11E008DF1AF /* Setup.swift in Sources */,
-				8B72C41B2C270CFA008DF1AF /* Home.swift in Sources */,
+				8BBC79192C2DCAEC008ABFDA /* GettingStartedView.swift in Sources */,
+				8B0F74F02C359E3900265A96 /* RouterView.swift in Sources */,
+				8B72C4152C25F11E008DF1AF /* SetupView.swift in Sources */,
+				8B72C41B2C270CFA008DF1AF /* HomeView.swift in Sources */,
 				8B72C4272C273879008DF1AF /* ModelData.swift in Sources */,
 				8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */,
 				8B72C3EE2C25EDA7008DF1AF /* Trilium_Client.xcdatamodeld in Sources */,

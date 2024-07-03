@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NoteListView: View {
-    @EnvironmentObject var router: Router
     var noteList: Array<Note>
     var navigationTitle: String {
         return getParentTitle(childNoteId: noteList[0].parentNoteIds[0])

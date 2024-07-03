@@ -11,7 +11,7 @@ import SwiftUI
 struct Trilium_ClientApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RouterView()
         }
     }
 }

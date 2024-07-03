@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var router: Router
-    var isSetupDone: Bool {
-        return UserDefaults.standard.bool(forKey: "isSetupDone")
-    }
-
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @AppStorage("isSetupDone") private var isSetupDone = false
+    
     var body: some View {
-        RouterView {
-            GettingStarted()
+        if !hasCompletedOnboarding {
+            GettingStartedView(hasCompletedOnboarding: $hasCompletedOnboarding)
+        } else if !isSetupDone {
+            SetupView()
+        } else {
+            HomeView()
         }
-
     }
 }
+
 
 #Preview {
     ContentView()

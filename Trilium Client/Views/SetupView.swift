@@ -1,5 +1,5 @@
 //
-//  Setup.swift
+//  SetupView.swift
 //  Trilium Client
 //
 //  Created by Cao Thai Duong on 2024/06/22.
@@ -8,66 +8,52 @@
 import Alamofire
 import SwiftUI
 
-struct Setup: View {
-    @EnvironmentObject var router: Router
-    
-    @State private var instanceUrl: String = ""
-    @State private var instancePassword: String = ""
-    @State private var instanceEtapiToken: String = ""
+struct SetupView: View {
+    @AppStorage("isSetupDone") private var isSetupDone: Bool = false
+    @AppStorage("instanceUrl") private var instanceUrl: String = ""
+    @AppStorage("instanceEtapiToken") private var instanceEtapiToken: String = ""
+    @AppStorage("instancePassword") private var instancePassword: String = ""
     
     @FocusState private var instanceUrlFieldFocused: Bool
     @FocusState private var instancePasswordFieldFocused: Bool
     @FocusState private var instanceEtapiTokenFieldFocused: Bool
     
-    @State private var useEtapiToken: Bool = false
+    @AppStorage("useEtapiToken") private var useEtapiToken: Bool = false
     
-    private var titleText: String = "Please setup before using"
-    private var urlText: String = "INSTANCE URL"
-    private var exampleURLText: String = "https://trilium.example.com"
-    private var passwordText: String = "INSTANCE PASSWORD"
-    private var passwordPlaceholderText: String = "Trilium instance login password"
-    private var etapiPlaceholderText: String = "Generated ETAPI Token"
-    private var etapiTokenBtnText: String = "ETAPI Token"
-    private var passwordBtnText: String = "Password"
-    private var etapiTokenText: String = "ETAPI TOKEN"
+    @State var showAlert: Bool = false
     
     func onSubmit() {
-        // func loginToInstance(instanceUrl: String, instancePassword: String?, instanceEtapiToken: String?, completion: @escaping (Result<String, Error>) -> Void)
         loginToInstance(instanceUrl: instanceUrl, instancePassword: instancePassword, instanceEtapiToken: instanceEtapiToken, completion: { result in
             switch result {
             case let .success(authToken):
                 print("Login success with token: \(authToken)")
                 UserDefaults.standard.set(instanceUrl, forKey: "instanceUrl")
                 UserDefaults.standard.set(useEtapiToken ? instanceEtapiToken : instancePassword, forKey: useEtapiToken ? "instanceEtapiToken" : "instancePassword")
-                UserDefaults.standard.set(true, forKey: "isSetupDone")
-                
-                // navigate to Home view using EnvironmentObject
-//                router.navigateTo(.home)
+                //                UserDefaults.standard.set(true, forKey: "isSetupDone")
+                isSetupDone = true
+                Router.shared.path.append(.Home)
             case let .failure(error):
                 print("Login failed with error: \(error)")
             }
         })
-        
     }
-    
-    @State var showAlert: Bool = false
     
     var body: some View {
         VStack {
             Image("IconColor")
-            Text(titleText)
+            Text("Please setup before using")
             Form {
-                Section(header: Text(urlText)) {
-                    TextField(urlText, text: $instanceUrl, prompt: Text(verbatim: exampleURLText))
+                Section(header: Text("INSTANCE URL")) {
+                    TextField("INSTANCE URL", text: $instanceUrl, prompt: Text(verbatim: "https://trilium.example.com"))
                         .focused($instanceUrlFieldFocused)
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                 }
                 
-                Section(header: Text(useEtapiToken ? etapiTokenText : passwordText),
+                Section(header: Text(useEtapiToken ? "ETAPI TOKEN" : "INSTANCE PASSWORD"),
                         footer: Text("Will be automaticly saved and using for login/authenticate to the instance"))
                 {
-                    SecureField(useEtapiToken ? etapiPlaceholderText : passwordPlaceholderText, text: useEtapiToken ? $instanceEtapiToken : $instancePassword)
+                    SecureField(useEtapiToken ? "Generated ETAPI Token" : "Login Password", text: useEtapiToken ? $instanceEtapiToken : $instancePassword)
                         .focused(useEtapiToken ? $instanceEtapiTokenFieldFocused : $instancePasswordFieldFocused)
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(false)
@@ -80,18 +66,17 @@ struct Setup: View {
                             instanceEtapiToken = ""
                         }
                     } label: {
-                        Text("or use " + (useEtapiToken ? passwordBtnText : etapiTokenBtnText))
+                        Text("or use " + (useEtapiToken ? "INSTANCE PASSWORD" : "ETAPI TOKEN"))
                     }
                     .buttonStyle(.borderless)
                 }
                 
                 Button {
-//                    if instanceUrl == "" || (useEtapiToken ? instanceEtapiToken : instancePassword) == "" {
-//                        showAlert.toggle()
-//                    } else {
-//                        onSubmit()
-                    router.navigateTo(.root)
-//                    }
+                    if instanceUrl == "" || (useEtapiToken ? instanceEtapiToken : instancePassword) == "" {
+                        showAlert.toggle()
+                    } else {
+                        onSubmit()
+                    }
                 } label: {
                     Text("Signin")
                 }
@@ -104,10 +89,8 @@ struct Setup: View {
         }
         .toolbar(.hidden)
     }
-
-    
 }
 
 #Preview {
-    Setup()
+    SetupView()
 }

@@ -8,29 +8,27 @@
 import Foundation
 import SwiftUI
 
-struct Home: View {
-    @EnvironmentObject var router: Router
-    
+struct HomeView: View {
     var root: [Note] {
         return getRoot()
     }
     
     init() {
-            print("Home view initialized")
-        }
-
+        print("Home view initialized")
+    }
+    
     var body: some View {
-        NavigationStack {
+        NavigationView {
             NoteListView(noteList: root)
         }
         .toolbar(.hidden)
         .onAppear {
             print("Home view appeared")
-
         }
     }
 }
 
+
 #Preview {
-    Home()
+    HomeView()
 }
