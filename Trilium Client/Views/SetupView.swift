@@ -38,6 +38,12 @@ struct SetupView: View {
         })
     }
     
+    //    init() {
+    //        if (isSetupDone) {
+    //            onSubmit()
+    //        }
+    //    }
+    
     var body: some View {
         VStack {
             Image("IconColor")

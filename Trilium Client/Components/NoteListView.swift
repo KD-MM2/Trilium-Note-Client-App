@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct NoteListView: View {
-    var noteList: Array<Note>
+    @ObservedObject var notesViewModel: NotesViewModel
+    var noteList: [Note]
     var navigationTitle: String {
-        return getParentTitle(childNoteId: noteList[0].parentNoteIds[0])
+        return notesViewModel.getParentTitle(childNoteId: noteList.count > 0 ? noteList[0].parentNoteIds[0] : "" )
     }
     
     var body: some View {
@@ -19,12 +20,12 @@ struct NoteListView: View {
                 if !note.isFolder {
                     NoteContentView(note: note)
                 } else {
-                    NoteListView(noteList: notes.filter {
+                    NoteListView(notesViewModel: notesViewModel, noteList: notesViewModel.notes.filter {
                         $0.parentNoteIds.contains(note.noteId)
                     })
                 }
             } label: {
-                NoteRow(note: note)
+                NoteRow(notesViewModel: notesViewModel, note: note)
             }
         }
         .navigationTitle(navigationTitle)
@@ -32,30 +33,29 @@ struct NoteListView: View {
         .toolbar(content: {
             Menu {
                 Section("Actions") {
-                    Button("Create note") {  }
-                    Button("...") {  }
+                    Button("Create note") {}
+                    Button("...") {}
                 }
                 
-                Button { } label: {
+                Button {} label: {
                     Label("Add to Favorites", systemImage: "heart")
                 }
                 
                 Divider()
                 
-                Button(role: .destructive) { } label: {
+                Button(role: .destructive) {} label: {
                     Label("Delete", systemImage: "trash")
                 }
             } label: {
                 Label("Menu", systemImage: "plus")
             }
-            
         })
     }
-    
 }
 
-#Preview {
-    NavigationStack {
-        NoteListView(noteList: getRoot())
-    }
-}
+//#Preview {
+//    @EnvironmentObject var notesViewModel: NotesViewModel
+//    NavigationStack {
+//        NoteListView(notesViewModel: notesViewModel, noteList: notesViewModel.notes)
+//    }
+//}

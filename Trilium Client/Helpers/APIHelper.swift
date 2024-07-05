@@ -13,6 +13,8 @@ struct AuthResponse: Decodable {
 }
 
 class TriliumAPI {
+    static var shared = TriliumAPI(baseURL: "", authToken: "", password: "")
+    
     private var baseURL: String
     private var authToken: String
     private var password: String
@@ -28,6 +30,10 @@ class TriliumAPI {
             "Authorization": authToken,
             "Content-Type": "application/json",
         ]
+    }
+    
+    static func updateSharedInstance(baseURL: String, authToken: String, password: String?) {
+        TriliumAPI.shared = TriliumAPI(baseURL: baseURL, authToken: authToken, password: password)
     }
     
     // MARK: - Authentication
@@ -69,16 +75,8 @@ class TriliumAPI {
     
     // MARK: - Notes
     
-    //   content:
-    // application/json; charset=utf-8:
-    //   schema:
-    //     properties:
-    //       authToken:
-    //         type: string
-    //         example: Bc4bFn0Ffiok_4NpbVCDnFz7B2WU+pdhW8B5Ne3DiR5wXrEyqdjgRIsk=
-    
     func createNote(parentNoteId: String, title: String, type: String, content: String, completion: @escaping (Result<Note, Error>) -> Void) {
-        let endpoint = "\(baseURL)/create-note"
+        let endpoint = "\(baseURL)/etapi/create-note"
         let parameters: [String: Any] = [
             "parentNoteId": parentNoteId,
             "title": title,
@@ -99,7 +97,7 @@ class TriliumAPI {
     }
     
     func getNote(noteId: String, completion: @escaping (Result<Note, Error>) -> Void) {
-        let endpoint = "\(baseURL)/notes/\(noteId)"
+        let endpoint = "\(baseURL)/etapi/notes/\(noteId)"
         
         AF.request(endpoint, method: .get, headers: headers)
             .validate()
@@ -114,7 +112,7 @@ class TriliumAPI {
     }
     
     func updateNote(noteId: String, updates: [String: Any], completion: @escaping (Result<Note, Error>) -> Void) {
-        let endpoint = "\(baseURL)/notes/\(noteId)"
+        let endpoint = "\(baseURL)/etapi/notes/\(noteId)"
         
         AF.request(endpoint, method: .patch, parameters: updates, encoding: JSONEncoding.default, headers: headers)
             .validate()
@@ -129,7 +127,7 @@ class TriliumAPI {
     }
     
     func deleteNote(noteId: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let endpoint = "\(baseURL)/notes/\(noteId)"
+        let endpoint = "\(baseURL)/etapi/notes/\(noteId)"
         
         AF.request(endpoint, method: .delete, headers: headers)
             .validate()
@@ -146,10 +144,12 @@ class TriliumAPI {
     // MARK: - Search
     
     func searchNotes(query: String, completion: @escaping (Result<[Note], Error>) -> Void) {
-        let endpoint = "\(baseURL)/notes"
+        let endpoint = "\(baseURL)/etapi/notes"
         let parameters: [String: Any] = ["search": query]
         
-        AF.request(endpoint, method: .get, parameters: parameters, headers: headers)
+        print("Search Notes: \(baseURL), \(endpoint)")
+        
+        AF.request(endpoint, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .validate()
             .responseDecodable(of: SearchResponse.self) { response in
                 switch response.result {
@@ -171,6 +171,7 @@ func loginToInstance(instanceUrl: String, instancePassword: String?, instanceEta
             switch result {
             case .success:
                 print("Verify Auth Token success")
+                TriliumAPI.updateSharedInstance(baseURL: instanceUrl, authToken: instanceEtapiToken!, password: instancePassword)
                 completion(.success(result))
             case let .failure(error):
                 print("Error: \(error)")
@@ -182,11 +183,11 @@ func loginToInstance(instanceUrl: String, instancePassword: String?, instanceEta
             switch result {
             case let .success(authToken):
                 print("Auth Token: \(authToken)")
+                TriliumAPI.updateSharedInstance(baseURL: instanceUrl, authToken: authToken, password: instancePassword)
                 completion(.success(authToken))
             case let .failure(error):
                 print("Error: \(error)")
             }
         }
     }
-    
 }

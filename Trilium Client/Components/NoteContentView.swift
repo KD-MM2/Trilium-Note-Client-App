@@ -10,8 +10,8 @@ import SwiftUI
 struct NoteContentView: View {
     var note: Note
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        Button{
+        Text(note.noteId)
+        Button {
             print(note.noteId)
         } label: {
             Text("print")
@@ -19,6 +19,6 @@ struct NoteContentView: View {
     }
 }
 
-#Preview {
-    NoteContentView(note: notes[0])
-}
+//#Preview {
+//    NoteContentView(note: NotesViewModel.shared.notes[0])
+//}

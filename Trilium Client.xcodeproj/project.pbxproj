@@ -24,7 +24,7 @@
 		8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4202C272DA7008DF1AF /* NoteRow.swift */; };
 		8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4222C2734D7008DF1AF /* NoteListView.swift */; };
 		8B72C4252C273635008DF1AF /* noteData.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B72C4242C273635008DF1AF /* noteData.json */; };
-		8B72C4272C273879008DF1AF /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4262C273879008DF1AF /* ModelData.swift */; };
+		8B72C4272C273879008DF1AF /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4262C273879008DF1AF /* NotesViewModel.swift */; };
 		8B72C4292C274F9B008DF1AF /* NoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4282C274F9B008DF1AF /* NoteContentView.swift */; };
 		8B72C42C2C275209008DF1AF /* SwiftDown in Frameworks */ = {isa = PBXBuildFile; productRef = 8B72C42B2C275209008DF1AF /* SwiftDown */; };
 		8B72C4302C2852A7008DF1AF /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C42F2C2852A7008DF1AF /* APIHelper.swift */; };
@@ -69,7 +69,7 @@
 		8B72C4202C272DA7008DF1AF /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		8B72C4222C2734D7008DF1AF /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
 		8B72C4242C273635008DF1AF /* noteData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = noteData.json; sourceTree = "<group>"; };
-		8B72C4262C273879008DF1AF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		8B72C4262C273879008DF1AF /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		8B72C4282C274F9B008DF1AF /* NoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentView.swift; sourceTree = "<group>"; };
 		8B72C42F2C2852A7008DF1AF /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedView.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				8B72C41C2C270D6A008DF1AF /* Note.swift */,
-				8B72C4262C273879008DF1AF /* ModelData.swift */,
+				8B72C4262C273879008DF1AF /* NotesViewModel.swift */,
 				8B72C42F2C2852A7008DF1AF /* APIHelper.swift */,
 				8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */,
 			);
@@ -359,7 +359,7 @@
 				8B0F74F02C359E3900265A96 /* RouterView.swift in Sources */,
 				8B72C4152C25F11E008DF1AF /* SetupView.swift in Sources */,
 				8B72C41B2C270CFA008DF1AF /* HomeView.swift in Sources */,
-				8B72C4272C273879008DF1AF /* ModelData.swift in Sources */,
+				8B72C4272C273879008DF1AF /* NotesViewModel.swift in Sources */,
 				8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */,
 				8B72C3EE2C25EDA7008DF1AF /* Trilium_Client.xcdatamodeld in Sources */,
 			);
