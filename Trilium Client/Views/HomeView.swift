@@ -18,17 +18,18 @@ struct HomeView: View {
     func login(completion: @escaping () -> Void) async {
         await withCheckedContinuation { continuation in
             DispatchQueue.main.async {
+                print("Login using ETAPI token: \(instanceEtapiToken)")
                 loginToInstance(instanceUrl: instanceUrl, instancePassword: instancePassword, instanceEtapiToken: instanceEtapiToken, completion: { result in
                     switch result {
-                    case let .success(authToken):
-                        print("Login success with token: \(authToken)")
+                    case let .success(response):
+                        print("Login with token success: \(response)")
+                        //                        instanceEtapiToken = authToken as! String
                         continuation.resume()
                         
                         completion()
                     case let .failure(error):
                         print("Login failed with error: \(error)")
                         continuation.resume()
-                        
                     }
                 })
             }
@@ -39,23 +40,19 @@ struct HomeView: View {
         NavigationView {
             if isLoading {
                 ProgressView("Loading...")
-            }
-            else {
+            } else {
                 NoteListView(notesViewModel: notesViewModel, noteList: notesViewModel.getRoot())
             }
         }
         .environmentObject(notesViewModel)
         .task {
-            await login() {
+            guard !notesViewModel.isLoaded else { return }
+            await login {
                 notesViewModel.fetchNotes()
             }
             isLoading = false
         }
         .toolbar(.hidden)
-        //        .onAppear {
-        //            print("Home view appeared")
-        //        }
-        
     }
 }
 

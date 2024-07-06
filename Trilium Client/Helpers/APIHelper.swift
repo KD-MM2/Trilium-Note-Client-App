@@ -49,7 +49,7 @@ class TriliumAPI {
                     self.authToken = authResponse.authToken
                     completion(.success(authResponse.authToken))
                 case let .failure(error):
-                    print("Error: \(error)")
+                    print("loginWithPassword Error: \(error)")
                     completion(.failure(error))
                 }
             }
@@ -59,8 +59,6 @@ class TriliumAPI {
     
     func getAppInfo(completion: @escaping (Result<AppInfo, Error>) -> Void) {
         let endpoint = "\(baseURL)/etapi/app-info"
-        print(endpoint)
-        print(headers)
         AF.request(endpoint, method: .get, headers: headers)
             .validate()
             .responseDecodable(of: AppInfo.self) { response in
@@ -143,11 +141,9 @@ class TriliumAPI {
     
     // MARK: - Search
     
-    func searchNotes(query: String, completion: @escaping (Result<[Note], Error>) -> Void) {
+    func searchNotes(query: String, completion: @escaping (Result<Array<Note>, Error>) -> Void) {
         let endpoint = "\(baseURL)/etapi/notes"
         let parameters: [String: Any] = ["search": query]
-        
-        print("Search Notes: \(baseURL), \(endpoint)")
         
         AF.request(endpoint, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .validate()
@@ -163,18 +159,18 @@ class TriliumAPI {
 }
 
 func loginToInstance(instanceUrl: String, instancePassword: String?, instanceEtapiToken: String?, completion: @escaping (Result<Any, Error>) -> Void) {
-    let useEtapiToken = instanceEtapiToken != nil && !instanceEtapiToken!.isEmpty
     let apiHelper = TriliumAPI(baseURL: instanceUrl, authToken: instanceEtapiToken ?? "", password: instancePassword ?? "")
+    
+    // check if instanceEtapiToken is not nil and not empty
+    let useEtapiToken = instanceEtapiToken != nil && !instanceEtapiToken!.isEmpty
     if useEtapiToken {
-        print("Using ETAPI Token")
         apiHelper.getAppInfo { result in
             switch result {
             case .success:
-                print("Verify Auth Token success")
                 TriliumAPI.updateSharedInstance(baseURL: instanceUrl, authToken: instanceEtapiToken!, password: instancePassword)
                 completion(.success(result))
             case let .failure(error):
-                print("Error: \(error)")
+                print("loginToInstance->token Error: \(error)")
             }
         }
     } else {
@@ -182,11 +178,10 @@ func loginToInstance(instanceUrl: String, instancePassword: String?, instanceEta
         apiHelper.loginWithPassword { result in
             switch result {
             case let .success(authToken):
-                print("Auth Token: \(authToken)")
                 TriliumAPI.updateSharedInstance(baseURL: instanceUrl, authToken: authToken, password: instancePassword)
                 completion(.success(authToken))
             case let .failure(error):
-                print("Error: \(error)")
+                print("loginToInstance->password Error: \(error)")
             }
         }
     }

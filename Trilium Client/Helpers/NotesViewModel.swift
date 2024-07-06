@@ -1,14 +1,16 @@
 //
-//  ModelData.swift
+//  NotesViewModel.swift
 //  Trilium Client
 //
 //  Created by Cao Thai Duong on 2024/06/23.
 //
 
 import Foundation
+import SwiftUI
 
 class NotesViewModel: ObservableObject {
     @Published var notes: Array<Note> = []
+    @Published var isLoaded: Bool = false
     
     func fetchNotes() {
         TriliumAPI.shared.searchNotes(query: "''") { result in
@@ -16,24 +18,23 @@ class NotesViewModel: ObservableObject {
             case let .success(fetchedNotes):
                 DispatchQueue.main.async {
                     self.notes = fetchedNotes
-                    //                    print(fetchedNotes)
+                    self.isLoaded = true
                 }
             case let .failure(error):
                 print("Error fetching notes: \(error)")
-                // Handle the error appropriately
+                self.isLoaded = false
             }
         }
     }
     
     func getRoot() -> Array<Note> {
-        return self.notes.filter {
+        return notes.filter {
             $0.parentNoteIds.contains("root") && $0.noteId != "_hidden"
         }
     }
     
-    
     func getParentTitle(childNoteId: String) -> String {
-        let parentNote = self.notes.first(where: { $0.noteId == childNoteId })
+        let parentNote = notes.first(where: { $0.noteId == childNoteId })
         return parentNote?.title ?? "Notes"
     }
     

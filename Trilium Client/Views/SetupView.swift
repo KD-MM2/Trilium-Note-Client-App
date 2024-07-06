@@ -23,26 +23,9 @@ struct SetupView: View {
     @State var showAlert: Bool = false
     
     func onSubmit() {
-        loginToInstance(instanceUrl: instanceUrl, instancePassword: instancePassword, instanceEtapiToken: instanceEtapiToken, completion: { result in
-            switch result {
-            case let .success(authToken):
-                print("Login success with token: \(authToken)")
-                UserDefaults.standard.set(instanceUrl, forKey: "instanceUrl")
-                UserDefaults.standard.set(useEtapiToken ? instanceEtapiToken : instancePassword, forKey: useEtapiToken ? "instanceEtapiToken" : "instancePassword")
-                //                UserDefaults.standard.set(true, forKey: "isSetupDone")
-                isSetupDone = true
-                Router.shared.path.append(.Home)
-            case let .failure(error):
-                print("Login failed with error: \(error)")
-            }
-        })
+        isSetupDone = true
+        Router.shared.path.append(.Home)
     }
-    
-    //    init() {
-    //        if (isSetupDone) {
-    //            onSubmit()
-    //        }
-    //    }
     
     var body: some View {
         VStack {
@@ -59,6 +42,7 @@ struct SetupView: View {
                 Section(header: Text(useEtapiToken ? "ETAPI TOKEN" : "INSTANCE PASSWORD"),
                         footer: Text("Will be automaticly saved and using for login/authenticate to the instance"))
                 {
+                    // TODO: if token not exist, use password to login and set token
                     SecureField(useEtapiToken ? "Generated ETAPI Token" : "Login Password", text: useEtapiToken ? $instanceEtapiToken : $instancePassword)
                         .focused(useEtapiToken ? $instanceEtapiTokenFieldFocused : $instancePasswordFieldFocused)
                         .textInputAutocapitalization(.never)
@@ -94,6 +78,7 @@ struct SetupView: View {
             })
         }
         .toolbar(.hidden)
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 
