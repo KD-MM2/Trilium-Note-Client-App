@@ -18,7 +18,7 @@ struct NoteListView: View {
         List(noteList, id: \.id) { note in
             NavigationLink {
                 if !note.isFolder {
-                    NoteContentView(note: note)
+                    NoteContentView(notesViewModel: notesViewModel, note: note)
                 } else {
                     NoteListView(notesViewModel: notesViewModel, noteList: notesViewModel.notes.filter {
                         $0.parentNoteIds.contains(note.noteId)
@@ -53,9 +53,8 @@ struct NoteListView: View {
     }
 }
 
-//#Preview {
-//    @EnvironmentObject var notesViewModel: NotesViewModel
-//    NavigationStack {
-//        NoteListView(notesViewModel: notesViewModel, noteList: notesViewModel.notes)
-//    }
-//}
+#Preview {
+    NavigationStack {
+        NoteListView(notesViewModel: NotesViewModel().self, noteList: NotesViewModel().self.notes)
+    }
+}

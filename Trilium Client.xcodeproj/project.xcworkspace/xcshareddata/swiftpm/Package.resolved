@@ -19,12 +19,12 @@
       }
     },
     {
-      "identity" : "swiftsoup",
+      "identity" : "richeditorview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/scinfu/SwiftSoup",
+      "location" : "https://github.com/Andrew-Chen-Wang/RichEditorView",
       "state" : {
-        "revision" : "028487d4a8a291b2fe1b4392b5425b6172056148",
-        "version" : "2.7.2"
+        "branch" : "master",
+        "revision" : "3a846e6addd784b777318b131eed5b923d98cf81"
       }
     }
   ],

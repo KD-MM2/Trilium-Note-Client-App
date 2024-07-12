@@ -35,7 +35,7 @@ struct NoteRow: View {
 
 //#Preview {
 //    Group {
-//        NoteRow(note: NotesViewModel.shared.notes[0])
+//        NoteRow(notesViewModel: notesViewModel, note: notesViewModel.shared.notes[0])
 //        NoteRow(note: NotesViewModel.shared.notes[20])
 //    }
 //}

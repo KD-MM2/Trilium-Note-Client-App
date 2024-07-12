@@ -139,6 +139,21 @@ class TriliumAPI {
             }
     }
     
+    func getNoteContent(noteId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let endpoint = "\(baseURL)/etapi/notes/\(noteId)/content"
+        
+        AF.request(endpoint, method: .get, headers: headers)
+            .validate()
+            .responseString { response in
+                switch response.result {
+                case let .success(content):
+                    completion(.success(content))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
     // MARK: - Search
     
     func searchNotes(query: String, completion: @escaping (Result<Array<Note>, Error>) -> Void) {

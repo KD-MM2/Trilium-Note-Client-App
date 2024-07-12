@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B0F74F02C359E3900265A96 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F74EF2C359E3900265A96 /* RouterView.swift */; };
-		8B605B072C3955630029936B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B605B062C3955630029936B /* SwiftSoup */; };
+		8B2DF50A2C3EFF1D00FE5E9C /* RichEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2DF5092C3EFF1D00FE5E9C /* RichEditorView */; };
 		8B605B0A2C3955810029936B /* MarkupEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 8B605B092C3955810029936B /* MarkupEditor */; };
 		8B605B122C39570B0029936B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8B605B112C39570B0029936B /* Alamofire */; };
 		8B72C3E22C25EDA5008DF1AF /* Trilium_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C3E12C25EDA5008DF1AF /* Trilium_ClientApp.swift */; };
@@ -31,7 +31,7 @@
 		8BBC79192C2DCAEC008ABFDA /* GettingStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */; };
 		8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */; };
 		8BBE64582C2C8A80006B6A4D /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */; };
-		8BEBA1A42C391778004BC62F /* HTML2MD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEBA1A32C391778004BC62F /* HTML2MD.swift */; };
+		8BCF89882C419801009E692E /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF89872C419801009E692E /* RichTextEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,7 @@
 		8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedView.swift; sourceTree = "<group>"; };
 		8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
-		8BEBA1A32C391778004BC62F /* HTML2MD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTML2MD.swift; sourceTree = "<group>"; };
+		8BCF89872C419801009E692E /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B605B122C39570B0029936B /* Alamofire in Frameworks */,
-				8B605B072C3955630029936B /* SwiftSoup in Frameworks */,
+				8B2DF50A2C3EFF1D00FE5E9C /* RichEditorView in Frameworks */,
 				8B605B0A2C3955810029936B /* MarkupEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,7 +198,6 @@
 				8B72C4262C273879008DF1AF /* NotesViewModel.swift */,
 				8B72C42F2C2852A7008DF1AF /* APIHelper.swift */,
 				8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */,
-				8BEBA1A32C391778004BC62F /* HTML2MD.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -206,6 +205,7 @@
 		8B72C4132C25F0EF008DF1AF /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8BCF89872C419801009E692E /* RichTextEditor.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -227,9 +227,9 @@
 			);
 			name = "Trilium Client";
 			packageProductDependencies = (
-				8B605B062C3955630029936B /* SwiftSoup */,
 				8B605B092C3955810029936B /* MarkupEditor */,
 				8B605B112C39570B0029936B /* Alamofire */,
+				8B2DF5092C3EFF1D00FE5E9C /* RichEditorView */,
 			);
 			productName = "Trilium Client";
 			productReference = 8B72C3DE2C25EDA5008DF1AF /* Trilium Client.app */;
@@ -304,9 +304,9 @@
 			);
 			mainGroup = 8B72C3D52C25EDA5008DF1AF;
 			packageReferences = (
-				8B605B052C3955630029936B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				8B605B082C3955810029936B /* XCRemoteSwiftPackageReference "MarkupEditor" */,
 				8B605B102C39570B0029936B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8B2DF5082C3EFF1D00FE5E9C /* XCRemoteSwiftPackageReference "RichEditorView" */,
 			);
 			productRefGroup = 8B72C3DF2C25EDA5008DF1AF /* Products */;
 			projectDirPath = "";
@@ -351,8 +351,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BEBA1A42C391778004BC62F /* HTML2MD.swift in Sources */,
 				8B72C4302C2852A7008DF1AF /* APIHelper.swift in Sources */,
+				8BCF89882C419801009E692E /* RichTextEditor.swift in Sources */,
 				8B72C4292C274F9B008DF1AF /* NoteContentView.swift in Sources */,
 				8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */,
 				8B72C3EB2C25EDA7008DF1AF /* Persistence.swift in Sources */,
@@ -706,12 +706,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B605B052C3955630029936B /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+		8B2DF5082C3EFF1D00FE5E9C /* XCRemoteSwiftPackageReference "RichEditorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			repositoryURL = "https://github.com/Andrew-Chen-Wang/RichEditorView";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.2;
+				branch = master;
+				kind = branch;
 			};
 		};
 		8B605B082C3955810029936B /* XCRemoteSwiftPackageReference "MarkupEditor" */ = {
@@ -733,10 +733,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B605B062C3955630029936B /* SwiftSoup */ = {
+		8B2DF5092C3EFF1D00FE5E9C /* RichEditorView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B605B052C3955630029936B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
+			package = 8B2DF5082C3EFF1D00FE5E9C /* XCRemoteSwiftPackageReference "RichEditorView" */;
+			productName = RichEditorView;
 		};
 		8B605B092C3955810029936B /* MarkupEditor */ = {
 			isa = XCSwiftPackageProductDependency;
