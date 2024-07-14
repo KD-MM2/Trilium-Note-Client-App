@@ -8,24 +8,6 @@
         "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
         "version" : "5.8.1"
       }
-    },
-    {
-      "identity" : "markupeditor",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/stevengharris/MarkupEditor",
-      "state" : {
-        "revision" : "d44007f951a7c64b260feaaa99c08e8f253414f8",
-        "version" : "0.7.2"
-      }
-    },
-    {
-      "identity" : "richeditorview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Andrew-Chen-Wang/RichEditorView",
-      "state" : {
-        "branch" : "master",
-        "revision" : "3a846e6addd784b777318b131eed5b923d98cf81"
-      }
     }
   ],
   "version" : 2
