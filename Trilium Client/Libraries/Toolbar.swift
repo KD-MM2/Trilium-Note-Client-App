@@ -11,6 +11,11 @@ struct StyleToolbar: View {
     let onItalic: () -> Void
     let onUnderline: () -> Void
     let onStrikethrough: () -> Void
+    let onIncreaseFontSize: () -> Void
+    let onDecreaseFontSize: () -> Void
+    @Binding var currentFontSize: CGFloat
+    let onLink: () -> Void
+    let onCode: () -> Void
     
     var body: some View {
         HStack {
@@ -26,11 +31,33 @@ struct StyleToolbar: View {
             Button(action: onStrikethrough) {
                 Image(systemName: "strikethrough")
             }
+            Button(action: onLink) { Image(systemName: "link") }
+            Button(action: onCode) { Image(systemName: "chevron.left.forwardslash.chevron.right") }
+            
+            Button(action: onDecreaseFontSize) {
+                Image(systemName: "minus.circle")
+            }
+            Text("\(Int(currentFontSize))")
+                .frame(minWidth: 30)
+            Button(action: onIncreaseFontSize) {
+                Image(systemName: "plus.circle")
+            }
+            
         }
         .padding()
     }
 }
 
-//#Preview {
-//    StyleToolbar()
-//}
+#Preview {
+    StyleToolbar(
+        onBold: {},
+        onItalic: {},
+        onUnderline: {},
+        onStrikethrough: {},
+        onIncreaseFontSize: {},
+        onDecreaseFontSize: {},
+        currentFontSize: .constant(CGFloat(12.0)),
+        onLink: {},
+        onCode: {}
+    )
+}

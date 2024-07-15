@@ -31,8 +31,8 @@ public struct RichTextEditor: ViewRepresentable {
         _attributedString = text
     }
     
-    @Binding
-    public var attributedString: NSAttributedString
+    @Binding public var attributedString: NSAttributedString
+    @State private var currentFontSize: CGFloat = 12
     // @Binding public var htmlString: String
     
     // public init(htmlString: Binding<String>) {
@@ -49,7 +49,15 @@ public struct RichTextEditor: ViewRepresentable {
             onBold: { self.applyStyle(.bold) },
             onItalic: { self.applyStyle(.italic) },
             onUnderline: { self.applyStyle(.underline) },
-            onStrikethrough: { self.applyStyle(.strikethrough) }
+            onStrikethrough: { self.applyStyle(.strikethrough) },
+            onIncreaseFontSize: {self.increaseFontSize()},
+            onDecreaseFontSize: {self.decreaseFontSize()},
+            currentFontSize: $currentFontSize,
+            onLink: {
+                //                self.applyLinkStyle(linkUrl: linkUrl)
+                //                                self.applyStyle(.link)
+            },
+            onCode: { self.applyStyle(.code) }
         )).view!
         
         let container = UIStackView(arrangedSubviews: [toolbar, textView])
@@ -58,7 +66,11 @@ public struct RichTextEditor: ViewRepresentable {
         return container
     }
     
-    public func updateUIView(_: UIViewType, context _: Context) {}
+    public func updateUIView(_ uiView: UIViewType, context: Context) {
+        //        if let hostingView = uiView.subviews.last {
+        //            hostingView.isHidden = !showURLDialog
+        //        }
+    }
     
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -72,6 +84,7 @@ public struct RichTextEditor: ViewRepresentable {
         
         let currentAttributes = textView.attributedText.attributes(at: selectedRange.location, effectiveRange: nil)
         var newAttributes: [NSAttributedString.Key: Any] = [:]
+        var attributesToRemove: [NSAttributedString.Key: Any] = [:]
         
         switch style {
         case .bold:
@@ -83,42 +96,101 @@ public struct RichTextEditor: ViewRepresentable {
                 newAttributes[.font] = font.isItalic ? font.withoutItalic() : font.withItalic()
             }
         case .underline:
-            if let underlineStyle = currentAttributes[.underlineStyle] as? Int {
-                // If underline is present, remove it
-                newAttributes[.underlineStyle] = nil
+            if currentAttributes[.underlineStyle] != nil {
+                attributesToRemove[.underlineStyle] = currentAttributes[.underlineStyle] as Any
             } else {
-                // If no underline, add it
                 newAttributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
             }
         case .strikethrough:
-            if let strikethroughStyle = currentAttributes[.strikethroughStyle] as? Int {
-                // If strikethrough is present, remove it
-                newAttributes[.strikethroughStyle] = nil
+            if currentAttributes[.strikethroughStyle] != nil {
+                attributesToRemove[.strikethroughStyle] = currentAttributes[.strikethroughStyle] as Any
             } else {
-                // If no strikethrough, add it
                 newAttributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue
             }
+        case .fontSize(let size):
+            if let font = currentAttributes[.font] as? UIFont {
+                let newFont = font.withSize(size)
+                textView.textStorage.addAttribute(.font, value: newFont, range: selectedRange)
+                currentFontSize = size
+            }
+        case .link:
+            break
+            //            if currentAttributes[.link] != nil {
+            //                // If link is present, remove it
+            //                attributesToRemove[.link] = currentAttributes[.link] as Any
+            //            } else {
+            //                // If no link, add it
+            //                // Here we're using a placeholder URL. In a real app, you'd want to prompt the user for the URL.
+            //                let url = URL(string: "https://example.com")!
+            //                textView.textStorage.addAttribute(.link, value: url, range: selectedRange)
+            //            }
+        case .code:
+            if let font = currentAttributes[.font] as? UIFont {
+                if font.fontName.contains("Menlo") || font.fontName.contains("Courier") {
+                    // If it's already a monospace font, revert to system font
+                    let newFont = UIFont.systemFont(ofSize: font.pointSize)
+                    textView.textStorage.addAttribute(.font, value: newFont, range: selectedRange)
+                    textView.textStorage.removeAttribute(.backgroundColor, range: selectedRange)
+                } else {
+                    // If it's not a monospace font, change to one and add background color
+                    let newFont = UIFont(name: "Menlo-Regular", size: font.pointSize) ?? font
+                    textView.textStorage.addAttribute(.font, value: newFont, range: selectedRange)
+                    textView.textStorage.addAttribute(.backgroundColor, value: UIColor.lightGray.withAlphaComponent(0.2), range: selectedRange)
+                }
+            }
         }
         
-        if style == .underline {
-            // For underline, we need to remove the attribute if we're turning it off
-            if newAttributes[.underlineStyle] == nil {
-                textView.textStorage.removeAttribute(.underlineStyle, range: selectedRange)
-            } else {
-                textView.textStorage.addAttributes(newAttributes, range: selectedRange)
+        if attributesToRemove.count > 0 {
+            for (key, _) in attributesToRemove {
+                textView.textStorage.removeAttribute(key, range: selectedRange)
             }
-        } else if style == .strikethrough {
-            // For strikethrough, we need to remove the attribute if we're turning it off
-            if newAttributes[.strikethroughStyle] == nil {
-                textView.textStorage.removeAttribute(.strikethroughStyle, range: selectedRange)
-            } else {
-                textView.textStorage.addAttributes(newAttributes, range: selectedRange)
-            }
-        } else {
-            textView.textStorage.addAttributes(newAttributes, range: selectedRange)
         }
         
+        textView.textStorage.addAttributes(newAttributes, range: selectedRange)
         attributedString = textView.attributedText ?? NSAttributedString()
+    }
+    
+    func applyLinkStyle(linkUrl: String) {
+        let selectedRange = textView.selectedRange
+        
+        // If no text is selected, return
+        if selectedRange.length == 0 { return }
+        
+        let currentAttributes = textView.attributedText.attributes(at: selectedRange.location, effectiveRange: nil)
+        
+        if currentAttributes[.link] != nil {
+            // If link is present, remove it
+            //                attributesToRemove[.link] = currentAttributes[.link] as Any
+            textView.textStorage.removeAttribute(.link, range: selectedRange)
+        } else {
+            // If no link, add it
+            // Here we're using a placeholder URL. In a real app, you'd want to prompt the user for the URL.
+            let url = URL(string: linkUrl)!
+            textView.textStorage.addAttribute(.link, value: url, range: selectedRange)
+        }
+    }
+    
+    func increaseFontSize() {
+        modifyFontSize(by: 1)
+    }
+    
+    func decreaseFontSize() {
+        modifyFontSize(by: -1)
+    }
+    
+    private func modifyFontSize(by delta: CGFloat) {
+        let selectedRange = textView.selectedRange
+        
+        // If no text is selected, return
+        if selectedRange.length == 0 { return }
+        
+        let currentAttributes = textView.attributedText.attributes(at: selectedRange.location, effectiveRange: nil)
+        
+        if let font = currentAttributes[.font] as? UIFont {
+            let newSize = max(font.pointSize + delta, 1) // Ensure font size doesn't go below 1
+            applyStyle(.fontSize(newSize))
+            currentFontSize = newSize
+        }
     }
     
     public class Coordinator: NSObject, UITextViewDelegate {
@@ -131,11 +203,19 @@ public struct RichTextEditor: ViewRepresentable {
         public func textViewDidChange(_ textView: UITextView) {
             parent.attributedString = textView.attributedText
         }
+        
+        public func textViewDidChangeSelection(_ textView: UITextView) {
+            if let font = textView.font {
+                parent.currentFontSize = font.pointSize
+            }
+            
+        }
+        
     }
 }
 
 enum TextStyle {
-    case bold, italic, underline, strikethrough
+    case bold, italic, underline, strikethrough, fontSize(CGFloat), link, code
 }
 
 extension UIFont {
@@ -178,6 +258,3 @@ extension UIFont {
     }
 }
 
-// #Preview {
-//    RichTextEditor()
-// }
