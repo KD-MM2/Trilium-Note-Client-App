@@ -33,6 +33,7 @@ public struct RichTextEditor: ViewRepresentable {
     
     @Binding public var attributedString: NSAttributedString
     @State private var currentFontSize: CGFloat = 12
+    @State private var tempSelectedRange: NSRange = NSRange()
     // @Binding public var htmlString: String
     
     // public init(htmlString: Binding<String>) {
@@ -53,8 +54,9 @@ public struct RichTextEditor: ViewRepresentable {
             onIncreaseFontSize: {self.increaseFontSize()},
             onDecreaseFontSize: {self.decreaseFontSize()},
             currentFontSize: $currentFontSize,
-            onLink: {
-                //                self.applyLinkStyle(linkUrl: linkUrl)
+            onLink: { linkUrl in
+                print("onLink \(linkUrl)")
+                self.applyLinkStyle(linkUrl: linkUrl)
                 //                                self.applyStyle(.link)
             },
             onCode: { self.applyStyle(.code) }
@@ -151,22 +153,25 @@ public struct RichTextEditor: ViewRepresentable {
     }
     
     func applyLinkStyle(linkUrl: String) {
-        let selectedRange = textView.selectedRange
+        //        let selectedRange = textView.selectedRange
         
         // If no text is selected, return
-        if selectedRange.length == 0 { return }
+        if self.tempSelectedRange.length == 0 {
+            print("applyLinkStyle: No text selected")
+            return
+        }
         
-        let currentAttributes = textView.attributedText.attributes(at: selectedRange.location, effectiveRange: nil)
+        let currentAttributes = textView.attributedText.attributes(at: self.tempSelectedRange.location, effectiveRange: nil)
         
         if currentAttributes[.link] != nil {
             // If link is present, remove it
             //                attributesToRemove[.link] = currentAttributes[.link] as Any
-            textView.textStorage.removeAttribute(.link, range: selectedRange)
+            textView.textStorage.removeAttribute(.link, range: self.tempSelectedRange)
         } else {
             // If no link, add it
             // Here we're using a placeholder URL. In a real app, you'd want to prompt the user for the URL.
             let url = URL(string: linkUrl)!
-            textView.textStorage.addAttribute(.link, value: url, range: selectedRange)
+            textView.textStorage.addAttribute(.link, value: url, range: self.tempSelectedRange)
         }
     }
     
@@ -208,6 +213,9 @@ public struct RichTextEditor: ViewRepresentable {
             if let font = textView.font {
                 parent.currentFontSize = font.pointSize
             }
+            let selectedRange = textView.selectedRange
+            if selectedRange.length == 0 { return }
+            parent.tempSelectedRange = selectedRange
             
         }
         
