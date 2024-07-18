@@ -53,13 +53,9 @@ public struct RichTextEditor: ViewRepresentable {
             onStrikethrough: { self.applyStyle(.strikethrough) },
             onIncreaseFontSize: {self.increaseFontSize()},
             onDecreaseFontSize: {self.decreaseFontSize()},
-            currentFontSize: $currentFontSize,
-            onLink: { linkUrl in
-                print("onLink \(linkUrl)")
-                self.applyLinkStyle(linkUrl: linkUrl)
-                //                                self.applyStyle(.link)
-            },
-            onCode: { self.applyStyle(.code) }
+            onLink: { linkUrl in self.applyLinkStyle(linkUrl: linkUrl) },
+            onCode: { self.applyStyle(.code) },
+            currentFontSize: $currentFontSize
         )).view!
         
         let container = UIStackView(arrangedSubviews: [toolbar, textView])
@@ -68,18 +64,14 @@ public struct RichTextEditor: ViewRepresentable {
         return container
     }
     
-    public func updateUIView(_ uiView: UIViewType, context: Context) {
-        //        if let hostingView = uiView.subviews.last {
-        //            hostingView.isHidden = !showURLDialog
-        //        }
-    }
+    public func updateUIView(_: UIViewType, context: Context) {}
     
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
     func applyStyle(_ style: TextStyle) {
-        let selectedRange = textView.selectedRange
+        let selectedRange = self.tempSelectedRange
         
         // If no text is selected, return
         if selectedRange.length == 0 { return }
@@ -116,16 +108,8 @@ public struct RichTextEditor: ViewRepresentable {
                 currentFontSize = size
             }
         case .link:
+            // link is now handled separately
             break
-            //            if currentAttributes[.link] != nil {
-            //                // If link is present, remove it
-            //                attributesToRemove[.link] = currentAttributes[.link] as Any
-            //            } else {
-            //                // If no link, add it
-            //                // Here we're using a placeholder URL. In a real app, you'd want to prompt the user for the URL.
-            //                let url = URL(string: "https://example.com")!
-            //                textView.textStorage.addAttribute(.link, value: url, range: selectedRange)
-            //            }
         case .code:
             if let font = currentAttributes[.font] as? UIFont {
                 if font.fontName.contains("Menlo") || font.fontName.contains("Courier") {
@@ -153,25 +137,18 @@ public struct RichTextEditor: ViewRepresentable {
     }
     
     func applyLinkStyle(linkUrl: String) {
-        //        let selectedRange = textView.selectedRange
-        
         // If no text is selected, return
-        if self.tempSelectedRange.length == 0 {
-            print("applyLinkStyle: No text selected")
-            return
-        }
+        if self.tempSelectedRange.length == 0 { return }
         
         let currentAttributes = textView.attributedText.attributes(at: self.tempSelectedRange.location, effectiveRange: nil)
         
         if currentAttributes[.link] != nil {
-            // If link is present, remove it
-            //                attributesToRemove[.link] = currentAttributes[.link] as Any
             textView.textStorage.removeAttribute(.link, range: self.tempSelectedRange)
         } else {
-            // If no link, add it
-            // Here we're using a placeholder URL. In a real app, you'd want to prompt the user for the URL.
-            let url = URL(string: linkUrl)!
-            textView.textStorage.addAttribute(.link, value: url, range: self.tempSelectedRange)
+            if let url = URL(string: linkUrl) {
+                textView.textStorage.addAttribute(.link, value: url, range: self.tempSelectedRange)
+            }
+            
         }
     }
     
@@ -184,7 +161,7 @@ public struct RichTextEditor: ViewRepresentable {
     }
     
     private func modifyFontSize(by delta: CGFloat) {
-        let selectedRange = textView.selectedRange
+        let selectedRange = self.tempSelectedRange
         
         // If no text is selected, return
         if selectedRange.length == 0 { return }

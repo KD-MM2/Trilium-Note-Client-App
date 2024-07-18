@@ -13,72 +13,87 @@ struct StyleToolbar: View {
     let onStrikethrough: () -> Void
     let onIncreaseFontSize: () -> Void
     let onDecreaseFontSize: () -> Void
-    @Binding var currentFontSize: CGFloat
     let onLink: (String) -> Void
     let onCode: () -> Void
+    @Binding var currentFontSize: CGFloat
     
-    @State private var isLinkDialogPresented: Bool = false
-    @State private var linkURL: String = ""
+    private func presentLinkAlert(completion: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: "Enter link URL", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.text = "https://"
+            textField.placeholder = "https://www.example.com"
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            if let url = alert.textFields?.first?.text {
+                completion(url)
+            }
+        })
+        
+        DispatchQueue.main.async {
+            if let topController = UIApplication.topMostViewController() {
+                topController.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
     
     var body: some View {
         HStack {
-            Button(action: onBold) {
+            Button {
+                onBold()
+            } label: {
                 Image(systemName: "bold")
             }
-            Button(action: onItalic) {
+            
+            Button {
+                onItalic()
+            } label: {
                 Image(systemName: "italic")
             }
-            Button(action: onUnderline) {
+            
+            Button {
+                onUnderline()
+            } label: {
                 Image(systemName: "underline")
             }
-            Button(action: onStrikethrough) {
+            
+            Button {
+                onStrikethrough()
+            } label: {
                 Image(systemName: "strikethrough")
             }
-            Button(action: {
-                self.isLinkDialogPresented = true
-            }) {
+            Button {
+                presentLinkAlert { url in
+                    onLink(url)
+                }
+                
+            } label: {
                 Image(systemName: "link")
             }
-            Button(action: onCode) {
+            
+            Button {
+                onCode()
+            } label: {
                 Image(systemName: "chevron.left.forwardslash.chevron.right")
             }
             
-            Button(action: onDecreaseFontSize) {
+            Button {
+                onDecreaseFontSize()
+            } label: {
                 Image(systemName: "minus.circle")
             }
+            
             Text("\(Int(currentFontSize))")
                 .frame(minWidth: 30)
-            Button(action: onIncreaseFontSize) {
+            
+            Button {
+                onIncreaseFontSize()
+            } label: {
                 Image(systemName: "plus.circle")
             }
             
         }
         .padding()
-        .background(
-            AlertControllerWrapper(
-                isPresented: $isLinkDialogPresented,
-                alertTitle: "Enter link URL",
-                message: "",
-                textFieldPlaceholder: "https://www.example.com",
-                onSave: { url in
-                    self.linkURL = url
-                    print("Link URL: \(linkURL)")
-                    onLink(self.linkURL)
-                }
-            )
-        )
-        //        .alert(
-        //            Text("Enter link URL"),
-        //            isPresented: $isLinkDialogPresented
-        //        ) {
-        //            TextField("linkUrl", text: $linkURL, prompt: Text(verbatim: "https://www.example.com"))
-        //            Button("OK") {
-        //                print("Link URL: \(linkURL)")
-        //            }
-        //            Button("Cancel") {
-        //                self.isLinkDialogPresented = false
-        //            }
-        //        }
     }
 }
 
@@ -90,10 +105,8 @@ struct StyleToolbar: View {
         onStrikethrough: {},
         onIncreaseFontSize: {},
         onDecreaseFontSize: {},
-        currentFontSize: .constant(CGFloat(12.0)),
-        onLink: { linkUrl in
-            print("onLink \(linkUrl)")
-        },
-        onCode: {}
+        onLink: { linkUrl in },
+        onCode: {},
+        currentFontSize: .constant(CGFloat(12.0))
     )
 }

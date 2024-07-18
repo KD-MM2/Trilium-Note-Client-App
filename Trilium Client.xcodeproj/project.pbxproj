@@ -26,12 +26,12 @@
 		8B72C4272C273879008DF1AF /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4262C273879008DF1AF /* NotesViewModel.swift */; };
 		8B72C4292C274F9B008DF1AF /* NoteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C4282C274F9B008DF1AF /* NoteContentView.swift */; };
 		8B72C4302C2852A7008DF1AF /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B72C42F2C2852A7008DF1AF /* APIHelper.swift */; };
+		8B86B6FB2C497127005A53F7 /* UIApplication+topMostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86B6FA2C497127005A53F7 /* UIApplication+topMostViewController.swift */; };
+		8B86B6FD2C4971CA005A53F7 /* UIViewController+topMostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86B6FC2C4971CA005A53F7 /* UIViewController+topMostViewController.swift */; };
 		8B87DA302C42C0F50016E4CA /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87DA2F2C42C0F50016E4CA /* Toolbar.swift */; };
-		8BB4FB3E2C44369E006298A0 /* URLInputDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4FB3D2C44369E006298A0 /* URLInputDialog.swift */; };
 		8BBC79192C2DCAEC008ABFDA /* GettingStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */; };
 		8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */; };
 		8BBE64582C2C8A80006B6A4D /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */; };
-		8BC053F22C457640005FF318 /* AlertControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC053F12C457640005FF318 /* AlertControllerWrapper.swift */; };
 		8BCF89882C419801009E692E /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF89872C419801009E692E /* RichTextEditor.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,12 +74,12 @@
 		8B72C4262C273879008DF1AF /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		8B72C4282C274F9B008DF1AF /* NoteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentView.swift; sourceTree = "<group>"; };
 		8B72C42F2C2852A7008DF1AF /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
+		8B86B6FA2C497127005A53F7 /* UIApplication+topMostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topMostViewController.swift"; sourceTree = "<group>"; };
+		8B86B6FC2C4971CA005A53F7 /* UIViewController+topMostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+topMostViewController.swift"; sourceTree = "<group>"; };
 		8B87DA2F2C42C0F50016E4CA /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
-		8BB4FB3D2C44369E006298A0 /* URLInputDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInputDialog.swift; sourceTree = "<group>"; };
 		8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedView.swift; sourceTree = "<group>"; };
 		8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
-		8BC053F12C457640005FF318 /* AlertControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerWrapper.swift; sourceTree = "<group>"; };
 		8BCF89872C419801009E692E /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,7 +189,6 @@
 				8B72C4202C272DA7008DF1AF /* NoteRow.swift */,
 				8B72C4222C2734D7008DF1AF /* NoteListView.swift */,
 				8B72C4282C274F9B008DF1AF /* NoteContentView.swift */,
-				8BB4FB3D2C44369E006298A0 /* URLInputDialog.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -201,7 +200,8 @@
 				8B72C4262C273879008DF1AF /* NotesViewModel.swift */,
 				8B72C42F2C2852A7008DF1AF /* APIHelper.swift */,
 				8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */,
-				8BC053F12C457640005FF318 /* AlertControllerWrapper.swift */,
+				8B86B6FA2C497127005A53F7 /* UIApplication+topMostViewController.swift */,
+				8B86B6FC2C4971CA005A53F7 /* UIViewController+topMostViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -358,17 +358,17 @@
 				8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */,
 				8B72C3EB2C25EDA7008DF1AF /* Persistence.swift in Sources */,
 				8BBE64582C2C8A80006B6A4D /* ViewRouter.swift in Sources */,
-				8BB4FB3E2C44369E006298A0 /* URLInputDialog.swift in Sources */,
 				8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */,
 				8B72C41D2C270D6A008DF1AF /* Note.swift in Sources */,
-				8BC053F22C457640005FF318 /* AlertControllerWrapper.swift in Sources */,
 				8B72C3E22C25EDA5008DF1AF /* Trilium_ClientApp.swift in Sources */,
 				8BBC79192C2DCAEC008ABFDA /* GettingStartedView.swift in Sources */,
 				8B87DA302C42C0F50016E4CA /* Toolbar.swift in Sources */,
+				8B86B6FD2C4971CA005A53F7 /* UIViewController+topMostViewController.swift in Sources */,
 				8B0F74F02C359E3900265A96 /* RouterView.swift in Sources */,
 				8B72C4152C25F11E008DF1AF /* SetupView.swift in Sources */,
 				8B72C41B2C270CFA008DF1AF /* HomeView.swift in Sources */,
 				8B72C4272C273879008DF1AF /* NotesViewModel.swift in Sources */,
+				8B86B6FB2C497127005A53F7 /* UIApplication+topMostViewController.swift in Sources */,
 				8B72C4212C272DA7008DF1AF /* NoteRow.swift in Sources */,
 				8B72C3EE2C25EDA7008DF1AF /* Trilium_Client.xcdatamodeld in Sources */,
 			);
