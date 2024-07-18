@@ -39,58 +39,43 @@ struct StyleToolbar: View {
     
     var body: some View {
         HStack {
-            Button {
-                onBold()
-            } label: {
+            Button(action: onBold, label: {
                 Image(systemName: "bold")
-            }
+            })
             
-            Button {
-                onItalic()
-            } label: {
+            Button (action: onItalic, label: {
                 Image(systemName: "italic")
-            }
+            })
             
-            Button {
-                onUnderline()
-            } label: {
+            Button (action: onUnderline, label: {
                 Image(systemName: "underline")
-            }
+            })
             
-            Button {
-                onStrikethrough()
-            } label: {
+            Button(action: onStrikethrough, label: {
                 Image(systemName: "strikethrough")
-            }
-            Button {
+            })
+            Button(action: {
                 presentLinkAlert { url in
                     onLink(url)
                 }
-                
-            } label: {
+            }, label: {
                 Image(systemName: "link")
-            }
+            })
             
-            Button {
-                onCode()
-            } label: {
+            Button(action: onCode, label: {
                 Image(systemName: "chevron.left.forwardslash.chevron.right")
-            }
+            })
             
-            Button {
-                onDecreaseFontSize()
-            } label: {
+            Button (action: onDecreaseFontSize, label: {
                 Image(systemName: "minus.circle")
-            }
+            })
             
             Text("\(Int(currentFontSize))")
                 .frame(minWidth: 30)
             
-            Button {
-                onIncreaseFontSize()
-            } label: {
+            Button(action: onIncreaseFontSize, label: {
                 Image(systemName: "plus.circle")
-            }
+            })
             
         }
         .padding()
