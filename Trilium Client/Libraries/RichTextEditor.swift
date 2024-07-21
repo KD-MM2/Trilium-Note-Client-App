@@ -33,7 +33,11 @@ public struct RichTextEditor: ViewRepresentable {
     
     @Binding public var attributedString: NSAttributedString
     @State private var currentFontSize: CGFloat = 12
+    @State private var currentFgColor: UIColor = .black
+    @State private var currentBgColor: UIColor = .white
     @State private var tempSelectedRange: NSRange = NSRange()
+    @State private var keyboardHeight: CGFloat = 0
+    
     // @Binding public var htmlString: String
     
     // public init(htmlString: Binding<String>) {
@@ -55,16 +59,26 @@ public struct RichTextEditor: ViewRepresentable {
             onDecreaseFontSize: {self.decreaseFontSize()},
             onLink: { linkUrl in self.applyLinkStyle(linkUrl: linkUrl) },
             onCode: { self.applyStyle(.code) },
-            currentFontSize: $currentFontSize
+            onFgColor: { color in self.applyStyle(.fgColor(color)) },
+            onBgColor: { color in self.applyStyle(.bgColor(color)) },
+            onSetFontSize: { fontSize in self.setFontSize(to: fontSize) },
+            currentFontSize: $currentFontSize,
+            currentFgColor: $currentFgColor,
+            currentBgColor: $currentBgColor
         )).view!
+        toolbar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
+        textView.inputAccessoryView = toolbar
         
-        let container = UIStackView(arrangedSubviews: [toolbar, textView])
-        container.axis = .vertical
-        
-        return container
+        return textView
     }
     
-    public func updateUIView(_: UIViewType, context: Context) {}
+    public func updateUIView(_ uiView: UIViewType, context: Context) {
+        if let textView = uiView as? UITextView {
+            textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            textView.scrollIndicatorInsets = textView.contentInset
+        }
+    }
+    
     
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -124,7 +138,16 @@ public struct RichTextEditor: ViewRepresentable {
                     textView.textStorage.addAttribute(.backgroundColor, value: UIColor.lightGray.withAlphaComponent(0.2), range: selectedRange)
                 }
             }
+            
+        case .fgColor(let color):
+            newAttributes[.foregroundColor] = color
+            currentFgColor = color
+            
+        case .bgColor(let color):
+            newAttributes[.backgroundColor] = color
+            currentBgColor = color
         }
+        
         
         if attributesToRemove.count > 0 {
             for (key, _) in attributesToRemove {
@@ -160,7 +183,11 @@ public struct RichTextEditor: ViewRepresentable {
         modifyFontSize(by: -1)
     }
     
-    private func modifyFontSize(by delta: CGFloat) {
+    func setFontSize(to size: CGFloat) {
+        modifyFontSize(to: size)
+    }
+    
+    private func modifyFontSize(by delta: CGFloat? = nil, to newSize: CGFloat? = nil) {
         let selectedRange = self.tempSelectedRange
         
         // If no text is selected, return
@@ -169,9 +196,17 @@ public struct RichTextEditor: ViewRepresentable {
         let currentAttributes = textView.attributedText.attributes(at: selectedRange.location, effectiveRange: nil)
         
         if let font = currentAttributes[.font] as? UIFont {
-            let newSize = max(font.pointSize + delta, 1) // Ensure font size doesn't go below 1
-            applyStyle(.fontSize(newSize))
-            currentFontSize = newSize
+            let updatedSize: CGFloat
+            if let delta = delta {
+                updatedSize = max(font.pointSize + delta, 1) // Ensure font size doesn't go below 1
+            } else if let newSize = newSize {
+                updatedSize = max(newSize, 1) // Ensure font size doesn't go below 1
+            } else {
+                return // If neither delta nor newSize is provided, do nothing
+            }
+            
+            applyStyle(.fontSize(updatedSize))
+            currentFontSize = updatedSize
         }
     }
     
@@ -190,17 +225,27 @@ public struct RichTextEditor: ViewRepresentable {
             if let font = textView.font {
                 parent.currentFontSize = font.pointSize
             }
+            if let fgColor = textView.textColor {
+                parent.currentFgColor = fgColor
+            }
+            if let bgColor = textView.backgroundColor {
+                parent.currentBgColor = bgColor
+            }
             let selectedRange = textView.selectedRange
             if selectedRange.length == 0 { return }
             parent.tempSelectedRange = selectedRange
             
         }
         
+        public func dismantleUIView(_ uiView: UIViewType, coordinator: Coordinator) {
+            NotificationCenter.default.removeObserver(self)
+        }
+        
     }
 }
 
 enum TextStyle {
-    case bold, italic, underline, strikethrough, fontSize(CGFloat), link, code
+    case bold, italic, underline, strikethrough, fontSize(CGFloat), link, code, fgColor(UIColor), bgColor(UIColor)
 }
 
 extension UIFont {
