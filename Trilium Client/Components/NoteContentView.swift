@@ -8,7 +8,6 @@
 import MarkupEditor
 import SwiftUI
 
-
 struct NoteContentView: View {
     @ObservedObject var notesViewModel: NotesViewModel
     var note: Note
@@ -21,16 +20,35 @@ struct NoteContentView: View {
             if isLoading {
                 ProgressView("Loading...")
             } else {
-//                MarkupEditorView(html: $noteString)
+                //                MarkupEditorView(html: $noteString)
                 RichTextEditor(text: $noteContent)
                     .cornerRadius(5)
-//                    .frame(width: 500)
+                //                    .frame(width: 500)
             }
         }
         .padding()
         .background(Color.gray.opacity(0.3))
-//        .ignoresSafeArea(.keyboard, edges: .bottom)
-//        .ignoresSafeArea(.keyboard)
+        .toolbar(content: {
+            Button {
+                let documentAttributes = [NSAttributedString.DocumentAttributeKey.documentType: NSAttributedString.DocumentType.html]
+                do {
+                    let htmlData = try noteContent.data(from: NSMakeRange(0, noteContent.length), documentAttributes: documentAttributes)
+                    if let htmlString = String(data: htmlData, encoding: String.Encoding.utf8) {
+                        print(htmlString)
+                    }
+                } catch {
+                    print("error creating HTML from Attributed String")
+                }
+                //                guard let data = try? noteContent.data(from: NSRange(location: 0, length: noteContent.length),
+                //                                                            documentAttributes: [.documentType: NSAttributedString.DocumentType.html]) else {
+                //                    print("Error converting attributed string to HTML")
+                //                    return
+                //                }
+                //                print(String(data: data, encoding: .utf8) ?? "")
+            } label: {
+                Text("Save")
+            }
+        })
         .task {
             TriliumAPI.shared.getNoteContent(noteId: note.noteId, completion: { content in
                 switch content {

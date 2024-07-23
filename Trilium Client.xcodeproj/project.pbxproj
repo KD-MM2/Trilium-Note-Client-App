@@ -29,6 +29,7 @@
 		8B86B6FB2C497127005A53F7 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86B6FA2C497127005A53F7 /* UIApplication+Extension.swift */; };
 		8B86B6FD2C4971CA005A53F7 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86B6FC2C4971CA005A53F7 /* UIViewController+Extension.swift */; };
 		8B86B6FF2C497B3B005A53F7 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86B6FE2C497B3B005A53F7 /* ColorPickerController.swift */; };
+		8B86B7012C4FEDB7005A53F7 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B86B7002C4FEDB7005A53F7 /* NSAttributedString+Extension.swift */; };
 		8B87DA302C42C0F50016E4CA /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87DA2F2C42C0F50016E4CA /* Toolbar.swift */; };
 		8BBC79192C2DCAEC008ABFDA /* GettingStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */; };
 		8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */; };
@@ -78,6 +79,7 @@
 		8B86B6FA2C497127005A53F7 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		8B86B6FC2C4971CA005A53F7 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		8B86B6FE2C497B3B005A53F7 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		8B86B7002C4FEDB7005A53F7 /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		8B87DA2F2C42C0F50016E4CA /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		8BBC79182C2DCAEC008ABFDA /* GettingStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartedView.swift; sourceTree = "<group>"; };
 		8BBC791A2C2DCCEF008ABFDA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				8BBE64572C2C8A80006B6A4D /* ViewRouter.swift */,
 				8B86B6FA2C497127005A53F7 /* UIApplication+Extension.swift */,
 				8B86B6FC2C4971CA005A53F7 /* UIViewController+Extension.swift */,
+				8B86B7002C4FEDB7005A53F7 /* NSAttributedString+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				8BBC791B2C2DCCEF008ABFDA /* ContentView.swift in Sources */,
 				8B72C3EB2C25EDA7008DF1AF /* Persistence.swift in Sources */,
 				8BBE64582C2C8A80006B6A4D /* ViewRouter.swift in Sources */,
+				8B86B7012C4FEDB7005A53F7 /* NSAttributedString+Extension.swift in Sources */,
 				8B72C4232C2734D7008DF1AF /* NoteListView.swift in Sources */,
 				8B72C41D2C270D6A008DF1AF /* Note.swift in Sources */,
 				8B72C3E22C25EDA5008DF1AF /* Trilium_ClientApp.swift in Sources */,
